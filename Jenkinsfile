@@ -4,12 +4,7 @@ pipeline {
     registryCredential = 'wo7and-dockerhub'
     dockerImage = ''
     }
-  node {
-    wrap([$class: 'BuildUser']) {
-      def user = env.BUILD_USER_ID
-    }
-  }
-  
+ 
     agent any
     stages {
         stage('Git Clone') {
@@ -20,7 +15,9 @@ pipeline {
         stage('Build Image') {
             steps {
                script {
-                 dockerImage = docker.build imagename "--build-arg username=${user}"
+                 wrap([$class: 'BuildUser']) {         
+                 dockerImage = docker.build imagename "--build-arg username=${BUILD_USER}"
+                 }  
                }
             }
         }
