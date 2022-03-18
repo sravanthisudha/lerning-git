@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                   docker.withRegistry( '', registryCredential ) {
-                    dockerImgae.push("BUILD_NUMBER")
+                    dockerImage.push("BUILD_NUMBER")
                     dockerImage.push('latest')
                   }
                 }
