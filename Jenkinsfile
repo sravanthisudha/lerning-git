@@ -15,7 +15,7 @@ pipeline {
         stage('Build Image') {
             steps {
                script {
-                 dockerImage = docker.build imagename "--build-arg username=env.BUILD_USER_ID"
+                 dockerImage = docker.build imagename "--build-arg username=${BUILD_USER_ID}"
                }
             }
         }
