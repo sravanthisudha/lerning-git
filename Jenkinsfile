@@ -3,6 +3,9 @@ pipeline {
     imagename = "wo7and/mynginxapp"
     registryCredential = 'wo7and-dockerhub'
     dockerImage = ''
+      wrap([$class: 'BuildUser']) {
+        def user = env.BUILD_USER_ID
+      }
     }
 
     agent any
@@ -15,7 +18,7 @@ pipeline {
         stage('Build Image') {
             steps {
                script {
-                 dockerImage = docker.build imagename "--build-arg username=${BUILD_USER_ID}"
+                 dockerImage = docker.build imagename "--build-arg username=${user}"
                }
             }
         }
