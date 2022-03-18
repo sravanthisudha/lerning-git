@@ -1,22 +1,40 @@
 pipeline {
+  environment {
+    imagename = "wo7and/mynginxapp"
+    registryCredential = 'wo7and-dockerhub'
+    dockerImage = ''
+    }
+
     agent any
-
     stages {
+        stage('Git Clone') {
+            steps {
+                git([url: 'https://github.com/wo7and/lerning-git.git', branch: 'master', credentialId: 'wo7and-github-user-token'])
+            }
+        }
+        stage('Build Image') {
+            steps {
+               script {
+                 dockerImage = docker.build imagename
+               }
+            }
+        }
+        stage('') {
+            steps {
+                script {
+                  docker.withRegistry( '', registryCredential ) {
+                    dockerImgae.push("BUILD_NUMBER")
+                    dockerImage.push('latest')
+                  }
+                }
+            }
+        }
+        stage('Remove Unused docker image') {
+            steps{
+              sh "docker rmi $imagename:$BUILD_NUMBER"
+              sh "docker rmi $imagename:latest"
 
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
+             }
         }
     }
 }
