@@ -3,9 +3,7 @@ pipeline {
     imagename = "wo7and/mynginxapp"
     registryCredential = 'wo7and-dockerhub'
     dockerImage = ''
-    build_user = "Adam"
     }
- 
     agent any
     stages {
         stage('Git Clone') {
@@ -16,7 +14,7 @@ pipeline {
         stage('Build Image') {
             steps {
                script {
-                 dockerImage = docker.build("${imagename}", "--build-arg username=${build_user}" "-f ./Dockerfile")
+                 dockerImage = docker.build imagename
                }
             }
         }
