@@ -3,7 +3,7 @@ pipeline {
     imagename = "wo7and/mynginxapp"
     registryCredential = 'wo7and-dockerhub'
     dockerImage = ''
-    build_user = "wo7and"
+    build_user = "Adam"
     }
  
     agent any
