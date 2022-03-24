@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    imagename = "sravanthisudhaand/mynginxapp"
+    imagename = "sravanthi12and/mynginxapp"
     registryCredential = 'sravanthisudhaand-dockerhub'
     dockerImage = ''
     }
