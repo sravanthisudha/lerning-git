@@ -1,14 +1,14 @@
 pipeline {
   environment {
-    imagename = "sravanthi12anddockerhub/mynginxapp"
-    registryCredential = 'sravanthi12anddockerhub'
+    imagename = "sravanthi12/mynginxapp"
+    registryCredential = 'dockerhubid'
     dockerImage = ''
     }
     agent any
     stages {
         stage('Git Clone') {
             steps {
-                git([url: 'https://github.com/sravanthisudha/lerning-git.git', branch: 'master', credentialsId: 'sravanthisudha-github'])
+                git([url: 'https://github.com/sravanthisudha/lerning-git.git', branch: 'master', credentialsId: 'githubid'])
             }
         }
       stage('Build Image') {
